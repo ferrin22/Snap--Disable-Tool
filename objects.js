@@ -140,6 +140,8 @@ var WatcherMorph;
 var StagePrompterMorph;
 var Note;
 var SpriteHighlightMorph;
+//--------------------------Disable--------------
+var disable = true;
 
 // SpriteMorph /////////////////////////////////////////////////////////
 
@@ -177,7 +179,9 @@ SpriteMorph.prototype.blockColor = {
     operators : new Color(98, 194, 19),
     variables : new Color(243, 118, 29),
     lists : new Color(217, 77, 17),
-    other: new Color(150, 150, 150)
+    other: new Color(150, 150, 150),
+    //--------------Disable-------------------
+    disable : new Color(0, 0, 0)
 };
 
 SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
@@ -206,7 +210,8 @@ SpriteMorph.prototype.initBlocks = function () {
         forward: {
             only: SpriteMorph,
             type: 'command',
-            category: 'motion',
+            //------------Disable------------------
+            category: 'disable',
             spec: 'move %n steps',
             defaults: [10]
         },
@@ -3444,19 +3449,22 @@ SpriteMorph.prototype.setPosition = function (aPoint, justMe) {
 };
 
 SpriteMorph.prototype.forward = function (steps) {
-    var dest,
-        dist = steps * this.parent.scale || 0;
+    //---------------------Disable----------------------
+    if (!disable) {
+        var dest,
+            dist = steps * this.parent.scale || 0;
 
-    if (dist >= 0) {
-        dest = this.position().distanceAngle(dist, this.heading);
-    } else {
-        dest = this.position().distanceAngle(
-            Math.abs(dist),
-            (this.heading - 180)
-        );
+        if (dist >= 0) {
+            dest = this.position().distanceAngle(dist, this.heading);
+        } else {
+            dest = this.position().distanceAngle(
+                Math.abs(dist),
+                (this.heading - 180)
+            );
+        }
+        this.setPosition(dest);
+        this.positionTalkBubble();
     }
-    this.setPosition(dest);
-    this.positionTalkBubble();
 };
 
 SpriteMorph.prototype.setHeading = function (degrees) {
