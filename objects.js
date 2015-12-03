@@ -3499,9 +3499,8 @@ SpriteMorph.prototype.faceToXY = function (x, y) {
 
 SpriteMorph.prototype.turn = function (degrees) {
 //---------------------Disable----------------------
-    if (!disable) {
-        this.setHeading(this.heading + (+degrees || 0));
-    }
+    this.setHeading(this.heading + (+degrees || 0));
+
 };
 
 SpriteMorph.prototype.turnLeft = function (degrees) {
@@ -3701,7 +3700,7 @@ SpriteMorph.prototype.allHatBlocksForInteraction = function (interaction) {
 // SpriteMorph events
 
 SpriteMorph.prototype.mouseClickLeft = function () {
-    return this.receiveUserInteraction('clicked');
+    //return this.receiveUserInteraction('clicked');
 };
 
 SpriteMorph.prototype.mouseEnter = function () {

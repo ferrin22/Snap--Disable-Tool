@@ -3206,8 +3206,11 @@ BlockMorph.prototype.mouseClickLeft = function () {
     if (receiver) {
         stage = receiver.parentThatIsA(StageMorph);
         if (stage) {
+            var clr = SpriteMorph.prototype.blockColor[this.category];
+            if(this.color.eq(clr)) {
             stage.threads.toggleProcess(top);
         }
+    }
     }
 };
 
