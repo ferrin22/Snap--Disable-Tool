@@ -486,6 +486,7 @@ Process.prototype.evaluateContext = function () {
 
 Process.prototype.evaluateBlock = function (block, argCount) {
     // check for special forms
+    
     if (contains(['reportOr', 'reportAnd', 'doReport'], block.selector)) {
         return this[block.selector](block);
     }
@@ -494,7 +495,7 @@ Process.prototype.evaluateBlock = function (block, argCount) {
     var rcvr = this.context.receiver || this.topBlock.receiver(),
         inputs = this.context.inputs;
 
-    if (argCount > inputs.length) {
+    if (argCount > inputs.length && block.color == 'rgba(74,108,212,1)') {
         this.evaluateNextInput(block);
     } else {
         if (this[block.selector]) {

@@ -3500,7 +3500,6 @@ SpriteMorph.prototype.faceToXY = function (x, y) {
 SpriteMorph.prototype.turn = function (degrees) {
 //---------------------Disable----------------------
     this.setHeading(this.heading + (+degrees || 0));
-
 };
 
 SpriteMorph.prototype.turnLeft = function (degrees) {

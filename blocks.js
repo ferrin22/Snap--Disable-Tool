@@ -3207,10 +3207,13 @@ BlockMorph.prototype.mouseClickLeft = function () {
         stage = receiver.parentThatIsA(StageMorph);
         if (stage) {
             var clr = SpriteMorph.prototype.blockColor[this.category];
-            if(this.color.eq(clr)) {
-            stage.threads.toggleProcess(top);
+
+            if (this.color.eq(clr)) {
+                stage.threads.toggleProcess(top, 0);
+            } else {
+                stage.threads.toggleProcess(top, 1);
+            }
         }
-    }
     }
 };
 
