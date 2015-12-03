@@ -2273,7 +2273,9 @@ BlockMorph.prototype.userMenu = function () {
 //--------------------Disable–------------------
     menu.addItem(
         "disable",
-        'userDestroy'
+        function () {
+            myself.alternateBlockColor();
+        }
     );
 //----------------------------------------------
 

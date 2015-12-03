@@ -141,7 +141,7 @@ var StagePrompterMorph;
 var Note;
 var SpriteHighlightMorph;
 //--------------------------Disable--------------
-var disable = true;
+var disable = false;
 
 // SpriteMorph /////////////////////////////////////////////////////////
 
@@ -205,19 +205,18 @@ SpriteMorph.prototype.bubbleMaxTextWidth = 130;
 
 SpriteMorph.prototype.initBlocks = function () {
     SpriteMorph.prototype.blocks = {
-
         // Motion
         forward: {
             only: SpriteMorph,
             type: 'command',
-            //------------Disable------------------
-            category: 'disable',
+            category: 'motion',
             spec: 'move %n steps',
             defaults: [10]
         },
         turn: {
             only: SpriteMorph,
             type: 'command',
+            //------------Disable------------------
             category: 'motion',
             spec: 'turn %clockwise %n degrees',
             defaults: [15]
@@ -3449,22 +3448,19 @@ SpriteMorph.prototype.setPosition = function (aPoint, justMe) {
 };
 
 SpriteMorph.prototype.forward = function (steps) {
-    //---------------------Disable----------------------
-    if (!disable) {
-        var dest,
-            dist = steps * this.parent.scale || 0;
+    var dest,
+    dist = steps * this.parent.scale || 0;
 
-        if (dist >= 0) {
-            dest = this.position().distanceAngle(dist, this.heading);
-        } else {
-            dest = this.position().distanceAngle(
-                Math.abs(dist),
-                (this.heading - 180)
+    if (dist >= 0) {
+        dest = this.position().distanceAngle(dist, this.heading);
+    } else {
+        dest = this.position().distanceAngle(
+            Math.abs(dist),
+            (this.heading - 180)
             );
-        }
-        this.setPosition(dest);
-        this.positionTalkBubble();
     }
+    this.setPosition(dest);
+    this.positionTalkBubble();
 };
 
 SpriteMorph.prototype.setHeading = function (degrees) {
@@ -3502,7 +3498,10 @@ SpriteMorph.prototype.faceToXY = function (x, y) {
 };
 
 SpriteMorph.prototype.turn = function (degrees) {
-    this.setHeading(this.heading + (+degrees || 0));
+//---------------------Disable----------------------
+    if (!disable) {
+        this.setHeading(this.heading + (+degrees || 0));
+    }
 };
 
 SpriteMorph.prototype.turnLeft = function (degrees) {
