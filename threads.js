@@ -498,6 +498,7 @@ Process.prototype.evaluateContext = function () {
 
 Process.prototype.evaluateBlock = function (block, argCount) {
     // check for special forms
+    var clr = SpriteMorph.prototype.blockColor[block.category];
     var bc = block.color
     
     if (contains(['reportOr', 'reportAnd', 'doReport'], block.selector)) {
@@ -508,11 +509,7 @@ Process.prototype.evaluateBlock = function (block, argCount) {
     var rcvr = this.context.receiver || this.topBlock.receiver(),
         inputs = this.context.inputs;
 
-    if (argCount > inputs.length && (bc == mCol || bc == loCol || 
-                                     bc == sCol || bc == pCol || 
-                                     bc == cCol || bc == sCol ||
-                                     bc == opCol || bc == vCol ||
-                                     bc == liCol || bc == otCol)) {
+    if (argCount > inputs.length && bc == clr) {
         this.evaluateNextInput(block);
     } else {
         if (this[block.selector]) {
