@@ -1,5 +1,7 @@
 # Snap--Disable-Tool
 
+EDIT 12/04/2015: Try it out - grab a motion block, right click, select 'disable' and see what happens.
+
 Description of project idea: 
 This project will add an "inline comment" functionality to the SNAP! programming language source code through the addition of a 'Disable' button. If the user clicks "disable" the block will turn grey or black and will be skipped when they run the code. Michael and I thought this was a crucial and important feature that would help students using Snap!, especially since this is possible in professional coding languages.
 
